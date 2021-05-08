@@ -4,7 +4,7 @@
     <div *ngFor="let data of documentList" class="document">
         <span>{{data.id}}</span>
         <div [style.max-height.px]="200" [innerHtml]=data.document></div>
-        <span>Created: {{data.date}}</span>
+        <span>Last Updated: {{data.date}}</span>
         <a [routerLink]="['/products']" [queryParams]="{ order: 'popular'}"></a>
         <button class="btn btn-default"> <a [routerLink]="['/document']" [queryParams] ="{id:data.id}">Edit Document</a> </button>
     </div>

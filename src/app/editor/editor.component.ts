@@ -74,7 +74,7 @@ export class EditorComponent implements OnInit {
   }
 
   public navigateHome() {
-    console.log('Hello');
+    this.router.navigate(['/']);
   }
 
   public saveDocument() {
