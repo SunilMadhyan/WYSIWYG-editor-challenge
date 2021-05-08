@@ -67,7 +67,6 @@ export class EditorComponent implements OnInit {
       .subscribe(data => {
         this.document = data.body[0];
         this.model.editorData = data.body[0].document;
-        console.log(this.document);
       })
     }
 
