@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     documentService.getDocuments().pipe(takeUntil(this.destroyed)).subscribe(resp => {
       if(resp.ok && resp.status === 200){
         this.documentList = resp.body;
-        console.log(this.documentList);
       }
     });
    }

@@ -10,7 +10,6 @@ app.use(cors())
 
 const getDocuments = (request, response) => {
   if (request.params.id !== "0") {
-    console.log(request.params);
     getDocument(request, response)
   } else {
     pool.query('SELECT * FROM documents', (error, results) => {
