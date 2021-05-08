@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as ClassicEditor  from '../../ckeditor';
+import { DocumentService } from '../shared/document.service';
+import { Document} from '../constants/document';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-editor',
@@ -8,6 +11,7 @@ import * as ClassicEditor  from '../../ckeditor';
 })
 export class EditorComponent implements OnInit {
 
+  document: Document = new Document("","","");
   public model= {
     editorData: "<p>Hello world!</p>"
   } 
@@ -51,15 +55,45 @@ export class EditorComponent implements OnInit {
     },
   }
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private router: Router, private documentService: DocumentService) { 
+   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.document.id = params['id'];
+    });
+    if ( this.document.id ) {
+      this.documentService.getDocuments(this.document.id)
+      .subscribe(data => {
+        this.document = data.body[0];
+        this.model.editorData = data.body[0].document;
+        console.log(this.document);
+      })
+    }
+
   }
 
   public navigateHome() {
-
+    console.log('Hello');
   }
+
   public saveDocument() {
-    
+    this.documentService.saveDocument(new Document('',this.model.editorData,''))
+    .subscribe(data => {
+      if (data && data.status === "success" ) {
+        this.document = data.message[0];
+        this.model.editorData = data.message[0].document;
+      }
+    });
+  }
+
+  public updateDocument() {
+    this.documentService.updateDocument(new Document(this.document.id,this.model.editorData,''))
+    .subscribe(data => {
+      if (data && data.status === "success" ) {
+        this.document = data.message[0];
+        this.model.editorData = data.message[0].document;
+      }
+    });
   }
 }

@@ -3,6 +3,6 @@
     <ckeditor [(ngModel)]="model.editorData" [editor]="Editor" [config]="editorConfig" ></ckeditor>
 </div>
 <div>
-    <button class="btn btn-default to-top-right" (click)="navigateHome()">Home</button>
-    <button class="btn btn-primary to-bottom-right" (click)="saveDocument()">Save Document</button>
+    <button class="btn btn-default to-top-right" (click)="navigateHome()">Back</button>
+    <button class="btn btn-primary to-bottom-right" (click)="document.id ? updateDocument() : saveDocument()">Save Document</button>
 </div>
