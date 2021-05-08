@@ -84,6 +84,7 @@ export class EditorComponent implements OnInit {
         this.model.editorData = data.message[0].document;
       }
     });
+    alert('Document Saved');
   }
 
   public updateDocument() {
@@ -94,5 +95,6 @@ export class EditorComponent implements OnInit {
         this.model.editorData = data.message[0].document;
       }
     });
+    alert('Document Saved');
   }
 }
